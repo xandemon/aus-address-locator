@@ -39,15 +39,15 @@ export const locationSchema = z.object({
   location: z.string(),
   postcode: z.number(),
   state: z.string(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
+  latitude: z.number().optional().nullable(),
+  longitude: z.number().optional().nullable(),
   category: z.string().optional(),
 });
 
 export const validationResultSchema = z.object({
   isValid: z.boolean(),
   message: z.string(),
-  location: locationSchema.optional(),
+  location: locationSchema.optional().nullable(),
 });
 
 export const tabStateSchema = z.object({
