@@ -39,8 +39,14 @@ export function isValidCoordinates(lat?: number, lng?: number): boolean {
   );
 }
 
-export function formatLocationDisplay(location: AustraliaPostLocation): string {
-  return `${formatSuburbName(location.location)}, ${location.state} ${
+export function formatLocationDisplay(location: {
+  location?: string;
+  name?: string;
+  state: string;
+  postcode: string | number;
+}): string {
+  const locationName = location.location || location.name || "Unknown";
+  return `${formatSuburbName(locationName)}, ${location.state} ${
     location.postcode
   }`;
 }

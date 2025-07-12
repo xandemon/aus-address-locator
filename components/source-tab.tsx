@@ -207,21 +207,37 @@ export function SourceTab() {
         )}
 
       {sourceData.selectedLocation && (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-          <h3 className="font-medium text-green-900 mb-2">Selected Location</h3>
-          <p className="text-green-800">
-            {formatLocationDisplay(sourceData.selectedLocation)}
-          </p>
-          {sourceData.selectedLocation.latitude &&
-            sourceData.selectedLocation.longitude && (
-              <p className="text-sm text-green-600 mt-1">
-                Coordinates: {sourceData.selectedLocation.latitude.toFixed(6)},{" "}
-                {sourceData.selectedLocation.longitude.toFixed(6)}
+        <div className="space-y-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h3 className="font-medium text-blue-900 mb-2">
+              🎯 Selected Location
+            </h3>
+            <p className="text-blue-800">
+              {formatLocationDisplay(sourceData.selectedLocation)}
+            </p>
+            {sourceData.selectedLocation.category && (
+              <span className="inline-block mt-2 px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">
+                {sourceData.selectedLocation.category}
+              </span>
+            )}
+            {sourceData.selectedLocation.latitude &&
+            sourceData.selectedLocation.longitude ? (
+              <div className="mt-4 rounded-lg overflow-hidden">
+                <iframe
+                  width="100%"
+                  height="400"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps?q=${sourceData?.selectedLocation?.latitude},${sourceData?.selectedLocation.longitude}&z=14&output=embed`}
+                />
+              </div>
+            ) : (
+              <p className="text-sm mt-1 text-gray-400">
+                Location coordintes not available
               </p>
             )}
-          <p className="text-sm text-green-600 mt-2">
-            Google Maps integration coming soon...
-          </p>
+          </div>
         </div>
       )}
     </div>

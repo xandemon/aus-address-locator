@@ -179,18 +179,40 @@ export function VerifierTab() {
         </Alert>
       )}
 
-      {/* TODO: Add Google Maps component here */}
       {verifierData.lastResult?.isValid && verifierData.lastResult.location && (
-        <div className="bg-gray-100 rounded-lg p-4">
-          <h3 className="font-medium text-gray-900 mb-2">Location Preview</h3>
-          <p className="text-gray-600">
-            {formatSuburbName(verifierData.lastResult.location.location)},{" "}
-            {verifierData.lastResult.location.state}{" "}
-            {verifierData.lastResult.location.postcode}
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            Google Maps integration coming soon...
-          </p>
+        <div className="space-y-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h3 className="font-medium text-blue-900 mb-2">
+              🎯 Selected Location
+            </h3>
+            <p className="text-blue-800">
+              {formatSuburbName(verifierData.lastResult.location.location)},{" "}
+              {verifierData.lastResult.location.state}{" "}
+              {verifierData.lastResult.location.postcode}
+            </p>
+            {verifierData.lastResult.location.category && (
+              <span className="inline-block mt-2 px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">
+                {verifierData.lastResult.location.category}
+              </span>
+            )}
+            {verifierData?.lastResult?.location?.latitude &&
+            verifierData?.lastResult?.location?.longitude ? (
+              <div className="mt-4 rounded-lg overflow-hidden">
+                <iframe
+                  width="100%"
+                  height="400"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps?q=${verifierData?.lastResult?.location?.latitude},${verifierData?.lastResult?.location.longitude}&z=14&output=embed`}
+                />
+              </div>
+            ) : (
+              <p className="text-sm mt-1 text-gray-400">
+                Location coordintes not available
+              </p>
+            )}
+          </div>
         </div>
       )}
     </div>
