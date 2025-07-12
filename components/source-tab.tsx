@@ -124,8 +124,8 @@ export function SourceTab() {
           Location Source
         </h2>
         <p className="text-gray-600">
-          Search for locations within suburbs or postcodes. Select a location to
-          view it on the map.
+          Search for suburbs across Australia. Select a location to view it on
+          the map.
         </p>
       </div>
 
@@ -152,7 +152,7 @@ export function SourceTab() {
         </div>
       </form>
 
-      {sourceData.results && sourceData.results.length > 0 && (
+      {sourceData.results && (
         <div className="space-y-4">
           <div className="flex items-center justify-between gap-2">
             <h3 className="text-base lg:text-lg font-semibold text-gray-900">
