@@ -70,7 +70,7 @@ export function SourceTab() {
         variables: {
           input: {
             query: searchData.query,
-            category: selectedCategory || undefined,
+            category: searchData.category || undefined,
             limit: 20,
           },
         },
