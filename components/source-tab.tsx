@@ -13,6 +13,8 @@ import {
 } from "@/lib/schemas";
 import { formatLocationDisplay } from "@/lib/utils";
 import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { useLazyQuery } from "@apollo/client";
+import { SEARCH_LOCATIONS } from "@/lib/graphql/schema";
 
 export function SourceTab() {
   const { sourceData, updateSourceData, isSearching, setIsSearching } =
@@ -23,6 +25,9 @@ export function SourceTab() {
     sourceData.category || ""
   );
   const [searchError, setSearchError] = useState<string>("");
+
+  const [searchLocationsQuery, { loading, data, error }] =
+    useLazyQuery(SEARCH_LOCATIONS);
 
   const categoryOptions = [
     { value: "", label: "All Categories" },
@@ -61,20 +66,26 @@ export function SourceTab() {
     setIsSearching(true);
 
     try {
-      const response = await fetch("/api/search-locations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(searchData),
+      const result = await searchLocationsQuery({
+        variables: {
+          input: {
+            query: searchData.query,
+            category: selectedCategory || undefined,
+            limit: 20,
+          },
+        },
       });
 
-      const results = await response.json();
-
-      updateSourceData({
-        query: searchData.query,
-        category: selectedCategory,
-        results: results.locations || [],
-        selectedLocation: undefined,
-      });
+      if (result.data?.searchLocations) {
+        updateSourceData({
+          query: searchData.query,
+          category: selectedCategory,
+          results: result.data.searchLocations.locations || [],
+          selectedLocation: undefined,
+        });
+      } else {
+        throw new Error("No data returned from GraphQL query");
+      }
     } catch (error) {
       console.error("Search failed:", error);
       updateSourceData({

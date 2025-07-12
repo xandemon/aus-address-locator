@@ -12,6 +12,8 @@ import {
   type VerifierForm,
 } from "@/lib/schemas";
 import { formatSuburbName, formatStateDisplay } from "@/lib/utils";
+import { useLazyQuery } from "@apollo/client";
+import { VERIFY_ADDRESS } from "@/lib/graphql/schema";
 
 export function VerifierTab() {
   const { verifierData, updateVerifierData, isVerifying, setIsVerifying } =
@@ -26,6 +28,9 @@ export function VerifierTab() {
   const [errors, setErrors] = useState<
     Partial<Record<keyof VerifierForm, string>>
   >({});
+
+  const [verifyAddressQuery, { loading, data, error }] =
+    useLazyQuery(VERIFY_ADDRESS);
 
   useEffect(() => {
     setFormData({
@@ -76,13 +81,21 @@ export function VerifierTab() {
     setIsVerifying(true);
 
     try {
-      const response = await fetch("/api/verify-address", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const result = await verifyAddressQuery({
+        variables: {
+          input: {
+            postcode: formData.postcode,
+            suburb: formData.suburb,
+            state: formData.state,
+          },
+        },
       });
-      const result = await response.json();
-      updateVerifierData({ lastResult: result });
+
+      if (result.data?.verifyAddress) {
+        updateVerifierData({ lastResult: result.data.verifyAddress });
+      } else {
+        throw new Error("No data returned from GraphQL query");
+      }
     } catch (error) {
       console.error("Verification failed:", error);
       updateVerifierData({

@@ -4,6 +4,8 @@ import { AppProvider, useApp } from "@/context/app-context";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/tabs";
 import { VerifierTab } from "@/components/verifier-tab";
 import { SourceTab } from "@/components/source-tab";
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "@/lib/apollo-client";
 
 function MainContent() {
   const { activeTab, setActiveTab } = useApp();
@@ -88,8 +90,10 @@ function MainContent() {
 
 export default function Home() {
   return (
-    <AppProvider>
-      <MainContent />
-    </AppProvider>
+    <ApolloProvider client={apolloClient}>
+      <AppProvider>
+        <MainContent />
+      </AppProvider>
+    </ApolloProvider>
   );
 }
