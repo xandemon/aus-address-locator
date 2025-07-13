@@ -4,11 +4,15 @@ import { AppProvider, useApp } from "@/context/app-context";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/tabs";
 import { VerifierTab } from "@/components/verifier-tab";
 import { SourceTab } from "@/components/source-tab";
+import { ActivityLogsModal } from "@/components/activity-logs-modal";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "@/lib/apollo-client";
+import { useState } from "react";
+import { ChartBarIcon } from "@heroicons/react/24/outline";
 
 function MainContent() {
   const { activeTab, setActiveTab } = useApp();
+  const [showActivityLogs, setShowActivityLogs] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -25,6 +29,13 @@ function MainContent() {
                 </p>
               </div>
               <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setShowActivityLogs(true)}
+                  className="flex items-center justify-center h-10 w-10 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                  title="View Activity Logs"
+                >
+                  <ChartBarIcon className="h-5 w-5 text-gray-600" />
+                </button>
                 <div className="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center">
                   <span className="text-white font-semibold text-sm">AU</span>
                 </div>
@@ -36,7 +47,6 @@ function MainContent() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs activeTab={activeTab} onTabChange={setActiveTab}>
-          {/* Tab Navigation */}
           <div className="flex justify-center mb-8">
             <TabsList>
               <TabsTrigger
@@ -70,7 +80,6 @@ function MainContent() {
         </Tabs>
       </main>
 
-      {/* Footer */}
       <footer className="bg-white border-t mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-500 text-sm">
@@ -84,6 +93,11 @@ function MainContent() {
           </div>
         </div>
       </footer>
+
+      <ActivityLogsModal
+        isOpen={showActivityLogs}
+        onClose={() => setShowActivityLogs(false)}
+      />
     </div>
   );
 }
