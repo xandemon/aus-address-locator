@@ -280,8 +280,7 @@ export function SourceTab() {
 
       {sourceData.selectedLocation && (
         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-blue-50 to-pink-50 p-4 sm:p-6 border-b border-slate-200">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:p-6 border-b border-slate-200">
             <div className="flex items-center">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
                 <Navigation className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
