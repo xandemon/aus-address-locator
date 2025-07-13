@@ -9,7 +9,6 @@ export const config = {
   },
   elasticsearch: {
     node: process.env.ELASTICSEARCH_NODE || "http://localhost:9200",
-    username: process.env.ELASTICSEARCH_USERNAME || "elastic",
-    password: process.env.ELASTICSEARCH_PASSWORD || "",
+    apiKey: process.env.ELASTICSEARCH_API_KEY || "",
   },
 } as const;
