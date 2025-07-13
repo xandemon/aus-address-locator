@@ -33,7 +33,7 @@ const Tabs = ({ activeTab, onTabChange, children }: TabsProps) => {
 
 const TabsList = ({ children }: TabListProps) => {
   return (
-    <div className="inline-flex bg-white border border-slate-200 rounded-2xl p-2 shadow-sm">
+    <div className="flex flex-col sm:flex-row bg-white border border-slate-200 rounded-2xl p-2 shadow-sm gap-2 sm:gap-0 w-full sm:w-auto">
       {children}
     </div>
   );
@@ -68,7 +68,7 @@ const TabsTrigger = ({
   return (
     <button
       className={cn(
-        "flex items-center px-6 py-4 rounded-xl transition-all duration-200 min-w-[240px] text-left",
+        "flex items-center px-4 sm:px-6 py-3 sm:py-4 rounded-xl transition-all duration-200 w-full sm:min-w-[240px] text-left",
         isActive
           ? "bg-blue-50 text-blue-700 border border-blue-100 shadow-sm"
           : "text-slate-600 border-white hover:bg-slate-50 hover:text-slate-900"
@@ -77,20 +77,24 @@ const TabsTrigger = ({
     >
       <div
         className={cn(
-          "w-10 h-10 rounded-lg flex items-center justify-center mr-4 transition-colors",
+          "w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center mr-3 sm:mr-4 transition-colors flex-shrink-0",
           isActive ? "bg-blue-100" : "bg-slate-100"
         )}
       >
         <Icon
           className={cn(
-            "w-5 h-5",
+            "w-4 h-4 sm:w-5 sm:h-5",
             isActive ? "text-blue-600" : "text-slate-600"
           )}
         />
       </div>
-      <div className="flex-1">
-        <div className="font-semibold text-sm">{title}</div>
-        <div className="text-xs opacity-70 mt-0.5">{description}</div>
+      <div className="flex-1 min-w-0">
+        <div className="font-semibold text-sm sm:text-base truncate">
+          {title}
+        </div>
+        <div className="text-xs sm:text-sm opacity-70 mt-0.5 sm:block lg:whitespace-nowrap">
+          {description}
+        </div>
       </div>
     </button>
   );

@@ -137,14 +137,14 @@ export function VerifierTab() {
   }));
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <div className="flex items-center mb-6">
-          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+        <div className="flex items-center mb-4 sm:mb-6">
+          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
             <Building2 className="w-4 h-4 text-blue-600" />
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900">
+          <div className="min-w-0">
+            <h3 className="text-base sm:text-lg font-semibold text-slate-900">
               Address Details
             </h3>
             <p className="text-sm text-slate-500">
@@ -153,8 +153,8 @@ export function VerifierTab() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             <Input
               label="Suburb"
               placeholder="Enter suburb name"
@@ -188,7 +188,7 @@ export function VerifierTab() {
           />
           {verifierData.lastResult && (
             <div
-              className={`border rounded-xl p-5 ${
+              className={`border rounded-xl p-4 sm:p-5 ${
                 verifierData.lastResult.isValid
                   ? "bg-emerald-50 border-emerald-200"
                   : "bg-red-50 border-red-200"
@@ -196,22 +196,22 @@ export function VerifierTab() {
             >
               <div className="flex items-start">
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center mr-4 ${
+                  className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0 ${
                     verifierData.lastResult.isValid
                       ? "bg-emerald-100"
                       : "bg-red-100"
                   }`}
                 >
                   {verifierData.lastResult.isValid ? (
-                    <CheckCircle className="w-5 h-5 text-emerald-600" />
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
                   ) : (
-                    <AlertTriangle className="w-5 h-5 text-red-600" />
+                    <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
                   )}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center mb-1">
                     <h3
-                      className={`text-base font-medium ${
+                      className={`text-sm sm:text-base font-medium ${
                         verifierData.lastResult.isValid
                           ? "text-emerald-900"
                           : "text-red-900"
@@ -227,7 +227,7 @@ export function VerifierTab() {
                       verifierData.lastResult.isValid
                         ? "text-emerald-700"
                         : "text-red-700"
-                    } text-sm`}
+                    } text-sm break-words`}
                   >
                     {verifierData.lastResult.message}
                   </p>
@@ -241,7 +241,7 @@ export function VerifierTab() {
               type="submit"
               isLoading={isVerifying}
               size="lg"
-              className="px-8 h-[50px]"
+              className="w-full sm:w-auto sm:px-8 h-[50px]"
             >
               <Zap className="w-4 h-4 mr-2" />
               {isVerifying ? "Verifying Address..." : "Verify Address"}
@@ -251,17 +251,17 @@ export function VerifierTab() {
       </div>
 
       {verifierData.lastResult && (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {verifierData.lastResult?.isValid &&
             verifierData.lastResult.location && (
               <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 border-b border-slate-200">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:p-6 border-b border-slate-200">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                      <Map className="w-5 h-5 text-blue-600" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                      <Map className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                     </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-900">
+                    <div className="min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-slate-900">
                         Location Information
                       </h3>
                       <p className="text-sm text-slate-600">
@@ -271,12 +271,12 @@ export function VerifierTab() {
                   </div>
                 </div>
 
-                <div className="p-6 space-y-6">
-                  <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 p-3 sm:p-4 bg-slate-50 rounded-xl">
                     <div className="flex items-center">
-                      <MapPin className="w-5 h-5 text-slate-600 mr-3" />
-                      <div>
-                        <div className="font-medium text-slate-900">
+                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2 sm:mr-3 flex-shrink-0" />
+                      <div className="min-w-0">
+                        <div className="font-medium text-slate-900 text-sm sm:text-base break-words">
                           {formatSuburbName(
                             verifierData.lastResult.location.location
                           )}
@@ -287,7 +287,7 @@ export function VerifierTab() {
                     </div>
 
                     {verifierData.lastResult.location.category && (
-                      <span className="px-3 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-full">
+                      <span className="px-2 sm:px-3 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-full shrink-0">
                         {verifierData.lastResult.location.category}
                       </span>
                     )}
@@ -311,20 +311,22 @@ export function VerifierTab() {
                       <div className="rounded-xl overflow-hidden border border-slate-200">
                         <iframe
                           width="100%"
-                          height="350"
+                          height="250"
                           loading="lazy"
                           allowFullScreen
                           referrerPolicy="no-referrer-when-downgrade"
                           src={`https://www.google.com/maps?q=${verifierData?.lastResult?.location?.latitude},${verifierData?.lastResult?.location.longitude}&z=14&output=embed`}
-                          className="w-full"
+                          className="w-full sm:h-[350px]"
                         />
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-8 text-slate-500">
-                      <Map className="w-8 h-8 mx-auto mb-2 text-slate-300" />
-                      <p className="font-medium">Map location unavailable</p>
-                      <p className="text-sm">
+                    <div className="text-center py-6 sm:py-8 text-slate-500">
+                      <Map className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2 text-slate-300" />
+                      <p className="font-medium text-sm sm:text-base">
+                        Map location unavailable
+                      </p>
+                      <p className="text-xs sm:text-sm">
                         Coordinates not provided for this address
                       </p>
                     </div>
@@ -335,16 +337,16 @@ export function VerifierTab() {
         </div>
       )}
 
-      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6">
         <div className="flex items-start">
           <div className="w-8 h-8 bg-slate-200 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
             <Shield className="w-4 h-4 text-slate-600" />
           </div>
-          <div>
-            <h4 className="font-medium text-slate-900 mb-2">
+          <div className="min-w-0">
+            <h4 className="font-medium text-slate-900 mb-2 text-sm sm:text-base">
               About Address Verification
             </h4>
-            <p className="text-sm text-slate-600 mb-3">
+            <p className="text-xs sm:text-sm text-slate-600">
               Our verification service uses official Australia Post data to
               validate postal addresses across Australia. This ensures accuracy
               for deliveries, billing, and location services.

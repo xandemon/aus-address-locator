@@ -134,14 +134,14 @@ export function SourceTab() {
   }, [selectedCategory]);
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <div className="flex items-center mb-6">
-          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+        <div className="flex items-center mb-4 sm:mb-6">
+          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
             <Search className="w-4 h-4 text-blue-600" />
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900">
+          <div className="min-w-0">
+            <h3 className="text-base sm:text-lg font-semibold text-slate-900">
               Search Locations
             </h3>
             <p className="text-sm text-slate-500">
@@ -177,14 +177,14 @@ export function SourceTab() {
 
       {sourceData.results && (
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-          <div className="p-6 border-b border-slate-100">
+          <div className="p-4 sm:p-6 border-b border-slate-100">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center mr-3">
+                <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
                   <Layers className="w-4 h-4 text-slate-600" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900">
+                <div className="min-w-0">
+                  <h3 className="text-base sm:text-lg font-semibold text-slate-900">
                     Search Results
                   </h3>
                   <p className="text-sm text-slate-500">
@@ -196,26 +196,27 @@ export function SourceTab() {
               </div>
 
               <div className="flex items-center gap-3">
-                <Filter className="w-4 h-4 text-slate-400" />
-                <div className="w-48">
+                <Filter className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                <div className="w-full sm:w-48">
                   <Select
                     placeholder="Filter by category"
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     options={categoryOptions}
+                    className="py-1"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {filteredResults && filteredResults.length > 0 ? (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-h-[30vh] overflow-y-auto pr-2">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 max-h-[40vh] sm:max-h-[30vh] overflow-y-auto pr-2">
                 {filteredResults.map((location: Location) => (
                   <div
                     key={location.id}
-                    className={`border rounded-xl p-4 cursor-pointer transition-all duration-200 ${
+                    className={`border rounded-xl p-3 sm:p-4 cursor-pointer transition-all duration-200 ${
                       sourceData.selectedLocation?.id === location.id
                         ? "border-blue-300 bg-blue-50 shadow-sm ring-2 ring-blue-200"
                         : "border-slate-200 hover:border-blue-200 hover:bg-slate-50"
@@ -223,16 +224,16 @@ export function SourceTab() {
                     onClick={() => handleLocationSelect(location)}
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex items-start flex-1">
+                      <div className="flex items-start flex-1 min-w-0">
                         <div
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center mr-4 ${
+                          className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0 ${
                             sourceData.selectedLocation?.id === location.id
                               ? "bg-blue-100"
                               : "bg-slate-100"
                           }`}
                         >
                           <MapPin
-                            className={`w-5 h-5 ${
+                            className={`w-4 h-4 sm:w-5 sm:h-5 ${
                               sourceData.selectedLocation?.id === location.id
                                 ? "text-blue-600"
                                 : "text-slate-600"
@@ -240,11 +241,11 @@ export function SourceTab() {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-slate-500 mb-1">
+                          <h4 className="font-medium text-slate-500 mb-1 text-sm sm:text-base break-words">
                             {formatLocationDisplay(location)}
                           </h4>
                           {location.category && (
-                            <span className="inline-block px-3 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded-full">
+                            <span className="inline-block px-2 sm:px-3 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded-full">
                               {location.category}
                             </span>
                           )}
@@ -253,7 +254,7 @@ export function SourceTab() {
 
                       {sourceData.selectedLocation?.id === location.id && (
                         <div className="flex-shrink-0">
-                          <CheckCircle className="w-6 h-6 text-blue-600" />
+                          <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                         </div>
                       )}
                     </div>
@@ -262,12 +263,12 @@ export function SourceTab() {
               </div>
             ) : (
               sourceData.query && (
-                <div className="text-center py-12">
-                  <Globe className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                  <p className="text-slate-500 mb-2">
+                <div className="text-center py-8 sm:py-12">
+                  <Globe className="w-8 w-8 sm:w-12 sm:h-12 text-slate-300 mx-auto mb-4" />
+                  <p className="text-slate-500 mb-2 text-sm sm:text-base">
                     No results found for <strong>"{sourceData.query}"</strong>
                   </p>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-xs sm:text-sm text-slate-400">
                     Try adjusting your search terms or removing category filters
                   </p>
                 </div>
@@ -280,13 +281,13 @@ export function SourceTab() {
       {sourceData.selectedLocation && (
         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-50 to-pink-50 p-6 border-b border-slate-200">
+          <div className="bg-gradient-to-r from-blue-50 to-pink-50 p-4 sm:p-6 border-b border-slate-200">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                <Navigation className="w-5 h-5 text-blue-600" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                <Navigation className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900">
+              <div className="min-w-0">
+                <h3 className="text-base sm:text-lg font-semibold text-slate-900">
                   Selected Location
                 </h3>
                 <p className="text-sm text-slate-600">
@@ -296,19 +297,19 @@ export function SourceTab() {
             </div>
           </div>
 
-          <div className="p-6 space-y-6">
-            <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+          <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 p-3 sm:p-4 bg-slate-50 rounded-xl">
               <div className="flex items-center">
-                <Building className="w-5 h-5 text-slate-600 mr-3" />
-                <div>
-                  <div className="font-medium text-slate-900">
+                <Building className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2 sm:mr-3 flex-shrink-0" />
+                <div className="min-w-0">
+                  <div className="font-medium text-slate-900 text-sm sm:text-base break-words">
                     {formatLocationDisplay(sourceData.selectedLocation)}
                   </div>
                 </div>
               </div>
 
               {sourceData.selectedLocation.category && (
-                <span className="px-3 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-full">
+                <span className="px-3 py-2 text-xs font-medium bg-blue-100 text-blue-700 rounded-full shrink-0">
                   {sourceData.selectedLocation.category}
                 </span>
               )}
@@ -320,20 +321,22 @@ export function SourceTab() {
                 <div className="rounded-xl overflow-hidden border border-slate-200">
                   <iframe
                     width="100%"
-                    height="350"
+                    height="250"
                     loading="lazy"
                     allowFullScreen
                     referrerPolicy="no-referrer-when-downgrade"
                     src={`https://www.google.com/maps?q=${sourceData?.selectedLocation?.latitude},${sourceData?.selectedLocation.longitude}&z=14&output=embed`}
-                    className="w-full"
+                    className="w-full sm:h-[350px]"
                   />
                 </div>
               </div>
             ) : (
-              <div className="text-center py-8 text-slate-500">
-                <Map className="w-8 h-8 mx-auto mb-2 text-slate-300" />
-                <p className="font-semibold">Map location unavailable</p>
-                <p className="text-sm text-slate-400">
+              <div className="text-center py-6 sm:py-8 text-slate-500">
+                <Map className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2 text-slate-300" />
+                <p className="font-semibold text-sm sm:text-base">
+                  Map location unavailable
+                </p>
+                <p className="text-xs sm:text-sm text-slate-400">
                   Coordinates missing for this location
                 </p>
               </div>
@@ -342,16 +345,16 @@ export function SourceTab() {
         </div>
       )}
 
-      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6">
         <div className="flex items-start">
           <div className="w-8 h-8 bg-slate-200 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
             <Globe className="w-4 h-4 text-slate-600" />
           </div>
-          <div>
-            <h4 className="font-medium text-slate-900 mb-2">
+          <div className="min-w-0">
+            <h4 className="font-medium text-slate-900 mb-2 text-sm sm:text-base">
               About Location Search
             </h4>
-            <p className="text-sm text-slate-600 mb-3">
+            <p className="text-xs sm:text-sm text-slate-600">
               Search through thousands of Australian locations including
               suburbs, cities, and postal areas. Each result provides detailed
               geographic information and map coordinates where available.

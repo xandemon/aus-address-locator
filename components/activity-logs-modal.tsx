@@ -88,24 +88,26 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full h-[75vh] overflow-hidden">
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-0 sm:p-4">
+      <div className="bg-white rounded-none sm:rounded-lg shadow-xl w-full h-full sm:max-w-4xl sm:h-[75vh] overflow-hidden">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">Activity Logs</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900">
+              Activity Logs
+            </h2>
             <p className="text-sm text-gray-600 mt-1">
               Recent interactions and analytics
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-gray-400 hover:text-gray-600 transition-colors p-1"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+        <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(100vh-120px)] sm:max-h-[calc(75vh-140px)]">
           {!elasticsearchHealthy ? (
             <div className="text-center py-8 text-gray-500">
               <FileText className="h-12 w-12 mx-auto mb-4 text-gray-300" />
@@ -115,67 +117,71 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
               </p>
             </div>
           ) : (
-            <div className="space-y-6">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="bg-gray-50 p-3 sm:p-4 rounded-lg border border-gray-200">
                   <div className="flex items-center">
-                    <BarChart3 className="h-5 w-5 text-blue-600 mr-2" />
+                    <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 mr-2" />
                     <div>
-                      <div className="text-lg font-bold text-blue-900">
+                      <div className="text-base sm:text-lg font-bold text-gray-900">
                         {stats.totalLogs}
                       </div>
-                      <div className="text-sm text-blue-600">Total Logs</div>
+                      <div className="text-xs sm:text-sm text-gray-600">
+                        Total Logs
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                <div className="bg-green-50 p-3 sm:p-4 rounded-lg border border-green-200">
                   <div className="flex items-center">
-                    <FileText className="h-5 w-5 text-green-600 mr-2" />
+                    <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 mr-2" />
                     <div>
-                      <div className="text-lg font-bold text-green-900">
+                      <div className="text-base sm:text-lg font-bold text-green-900">
                         {stats.verifierLogs}
                       </div>
-                      <div className="text-sm text-green-600">
+                      <div className="text-xs sm:text-sm text-green-600">
                         Verifications
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                <div className="bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200">
                   <div className="flex items-center">
-                    <MapPin className="h-5 w-5 text-purple-600 mr-2" />
+                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mr-2" />
                     <div>
-                      <div className="text-lg font-bold text-purple-900">
+                      <div className="text-base sm:text-lg font-bold text-blue-900">
                         {stats.sourceLogs}
                       </div>
-                      <div className="text-sm text-purple-600">Selections</div>
+                      <div className="text-xs sm:text-sm text-blue-600">
+                        Selections
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
                   Recent Activity
                 </h3>
 
                 {loading ? (
-                  <div className="text-center py-8">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto"></div>
+                  <div className="text-center py-6 sm:py-8">
+                    <div className="animate-spin rounded-full h-5 w-5 sm:h-6 sm:w-6 border-b-2 border-blue-600 mx-auto"></div>
                     <div className="text-sm text-gray-600 mt-2">Loading...</div>
                   </div>
                 ) : logs.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500">
-                    <FileText className="h-8 w-8 mx-auto mb-2 text-gray-300" />
-                    <p>No activity logs yet</p>
-                    <p className="text-sm mt-1">
+                  <div className="text-center py-6 sm:py-8 text-gray-500">
+                    <FileText className="h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-2 text-gray-300" />
+                    <p className="text-sm sm:text-base">No activity logs yet</p>
+                    <p className="text-xs sm:text-sm mt-1">
                       Start using the app to see interactions here
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     {logs.map((log, index) => {
                       const isVerifier = log.type === "verifier";
 
@@ -184,47 +190,49 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
                           key={`${log.sessionId}-${index}`}
                           className="bg-gray-50 border border-gray-200 rounded-lg p-3"
                         >
-                          <div className="flex items-center justify-between mb-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
                             <div className="flex items-center space-x-2">
                               {isVerifier ? (
-                                <FileText className="h-4 w-4 text-green-600" />
+                                <FileText className="h-4 w-4 text-green-600 flex-shrink-0" />
                               ) : (
-                                <MapPin className="h-4 w-4 text-purple-600" />
+                                <MapPin className="h-4 w-4 text-blue-600 flex-shrink-0" />
                               )}
                               <span
                                 className={`px-2 py-1 text-xs font-medium rounded ${
                                   isVerifier
                                     ? "bg-green-100 text-green-800"
-                                    : "bg-purple-100 text-purple-800"
+                                    : "bg-blue-100 text-blue-800"
                                 }`}
                               >
                                 {isVerifier ? "Verification" : "Selection"}
                               </span>
                             </div>
                             <div className="flex items-center text-xs text-gray-500">
-                              <Clock className="h-3 w-3 mr-1" />
-                              {formatTimestamp(log.timestamp)}
+                              <Clock className="h-3 w-3 mr-1 flex-shrink-0" />
+                              <span className="truncate">
+                                {formatTimestamp(log.timestamp)}
+                              </span>
                             </div>
                           </div>
 
                           {isVerifier ? (
                             <div className="text-sm">
-                              <div className="text-gray-700">
+                              <div className="text-gray-700 break-words">
                                 <strong>
                                   {formatSuburbName(log.input?.suburb || "")}
                                 </strong>
                                 , {log.input?.state} {log.input?.postcode}
                               </div>
-                              <div className="text-green-600 mt-1">
+                              <div className="text-green-600 mt-1 break-words">
                                 {log.result?.message}
                               </div>
                             </div>
                           ) : (
                             <div className="text-sm">
-                              <div className="text-gray-700">
+                              <div className="text-gray-700 break-words">
                                 Search: <strong>{log.searchQuery}</strong>
                               </div>
-                              <div className="text-purple-600 mt-1">
+                              <div className="text-blue-600 mt-1 break-words">
                                 Selected:{" "}
                                 {formatLocationDisplay(log.selectedLocation)}
                               </div>
