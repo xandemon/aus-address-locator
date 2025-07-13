@@ -15,6 +15,7 @@ import { formatLocationDisplay } from "@/lib/utils";
 import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { useLazyQuery } from "@apollo/client";
 import { SEARCH_LOCATIONS } from "@/lib/graphql/schema";
+import { logInteraction } from "@/lib/session";
 
 export function SourceTab() {
   const { sourceData, updateSourceData, isSearching, setIsSearching } =
@@ -98,11 +99,15 @@ export function SourceTab() {
     }
   };
 
-  const handleLocationSelect = (location: Location) => {
+  const handleLocationSelect = async (location: Location) => {
     updateSourceData({ selectedLocation: location });
 
-    // TODO: Log to Elasticsearch
-    console.log("Selected location for logging:", {
+    await logInteraction("source", {
+      searchQuery: sourceData.query,
+      selectedLocation: location,
+    });
+
+    console.log("Location selection logged to Elasticsearch:", {
       query: sourceData.query,
       selectedLocation: location,
       timestamp: new Date().toISOString(),

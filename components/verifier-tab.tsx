@@ -14,6 +14,7 @@ import {
 import { formatSuburbName, formatStateDisplay } from "@/lib/utils";
 import { useLazyQuery } from "@apollo/client";
 import { VERIFY_ADDRESS } from "@/lib/graphql/schema";
+import { logInteraction } from "@/lib/session";
 
 export function VerifierTab() {
   const { verifierData, updateVerifierData, isVerifying, setIsVerifying } =
@@ -92,18 +93,29 @@ export function VerifierTab() {
       });
 
       if (result.data?.verifyAddress) {
-        updateVerifierData({ lastResult: result.data.verifyAddress });
+        const verificationResult = result.data.verifyAddress;
+        updateVerifierData({ lastResult: verificationResult });
+
+        if (verificationResult.isValid) {
+          await logInteraction("verifier", {
+            input: {
+              postcode: formData.postcode,
+              suburb: formData.suburb,
+              state: formData.state,
+            },
+            result: verificationResult,
+          });
+        }
       } else {
         throw new Error("No data returned from GraphQL query");
       }
     } catch (error) {
       console.error("Verification failed:", error);
-      updateVerifierData({
-        lastResult: {
-          isValid: false,
-          message: "Failed to verify address. Please try again.",
-        },
-      });
+      const errorResult = {
+        isValid: false,
+        message: "Failed to verify address. Please try again.",
+      };
+      updateVerifierData({ lastResult: errorResult });
     } finally {
       setIsVerifying(false);
     }
