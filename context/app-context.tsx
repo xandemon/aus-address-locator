@@ -77,6 +77,7 @@ export function AppProvider({ children }: AppProviderProps) {
   useEffect(() => {
     if (isHydrated) {
       debouncedPersistTabState(state);
+      console.log(state);
     }
   }, [state, isHydrated]);
 
@@ -156,7 +157,6 @@ export function AppProvider({ children }: AppProviderProps) {
 
 export function useApp() {
   const context = useContext(AppContext);
-  console.log(">>", context);
   if (context === undefined) {
     throw new Error("useApp must be used within an AppProvider");
   }

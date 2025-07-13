@@ -16,7 +16,7 @@ export const verifierFormSchema = z.object({
     .string()
     .min(4, "Postcode must be 4 digits")
     .max(4, "Postcode must be 4 digits")
-    .regex(/^\d{4}$/, "Postcode must contain only numbers"),
+    .regex(/^\d{4}$/, "Postcode is required and must contain only numbers"),
   suburb: z
     .string()
     .min(1, "Suburb is required")
@@ -29,7 +29,7 @@ export const verifierFormSchema = z.object({
 export const sourceSearchSchema = z.object({
   query: z
     .string()
-    .min(1, "Search query is required")
+    .min(1, "Please enter a search query")
     .max(100, "Search query is too long"),
   category: z.string().optional(),
 });
