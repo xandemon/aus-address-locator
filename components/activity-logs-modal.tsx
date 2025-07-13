@@ -2,13 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { formatLocationDisplay, formatSuburbName } from "@/lib/utils";
-import {
-  ChartBarIcon,
-  ClockIcon,
-  DocumentTextIcon,
-  MapPinIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { BarChart3, Clock, FileText, MapPin, X } from "lucide-react";
 
 interface LogEntry {
   type: "verifier" | "source";
@@ -95,7 +89,7 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full h-[75vh] overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div>
             <h2 className="text-xl font-bold text-gray-900">Activity Logs</h2>
@@ -107,14 +101,14 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"
           >
-            <XMarkIcon className="h-6 w-6" />
+            <X className="h-6 w-6" />
           </button>
         </div>
 
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
           {!elasticsearchHealthy ? (
             <div className="text-center py-8 text-gray-500">
-              <DocumentTextIcon className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+              <FileText className="h-12 w-12 mx-auto mb-4 text-gray-300" />
               <p>Logging service unavailable</p>
               <p className="text-sm mt-1">
                 Elasticsearch is not configured or running
@@ -125,7 +119,7 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                   <div className="flex items-center">
-                    <ChartBarIcon className="h-5 w-5 text-blue-600 mr-2" />
+                    <BarChart3 className="h-5 w-5 text-blue-600 mr-2" />
                     <div>
                       <div className="text-lg font-bold text-blue-900">
                         {stats.totalLogs}
@@ -137,7 +131,7 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
 
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                   <div className="flex items-center">
-                    <DocumentTextIcon className="h-5 w-5 text-green-600 mr-2" />
+                    <FileText className="h-5 w-5 text-green-600 mr-2" />
                     <div>
                       <div className="text-lg font-bold text-green-900">
                         {stats.verifierLogs}
@@ -151,7 +145,7 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
 
                 <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
                   <div className="flex items-center">
-                    <MapPinIcon className="h-5 w-5 text-purple-600 mr-2" />
+                    <MapPin className="h-5 w-5 text-purple-600 mr-2" />
                     <div>
                       <div className="text-lg font-bold text-purple-900">
                         {stats.sourceLogs}
@@ -174,7 +168,7 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
                   </div>
                 ) : logs.length === 0 ? (
                   <div className="text-center py-8 text-gray-500">
-                    <DocumentTextIcon className="h-8 w-8 mx-auto mb-2 text-gray-300" />
+                    <FileText className="h-8 w-8 mx-auto mb-2 text-gray-300" />
                     <p>No activity logs yet</p>
                     <p className="text-sm mt-1">
                       Start using the app to see interactions here
@@ -193,9 +187,9 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center space-x-2">
                               {isVerifier ? (
-                                <DocumentTextIcon className="h-4 w-4 text-green-600" />
+                                <FileText className="h-4 w-4 text-green-600" />
                               ) : (
-                                <MapPinIcon className="h-4 w-4 text-purple-600" />
+                                <MapPin className="h-4 w-4 text-purple-600" />
                               )}
                               <span
                                 className={`px-2 py-1 text-xs font-medium rounded ${
@@ -208,7 +202,7 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
                               </span>
                             </div>
                             <div className="flex items-center text-xs text-gray-500">
-                              <ClockIcon className="h-3 w-3 mr-1" />
+                              <Clock className="h-3 w-3 mr-1" />
                               {formatTimestamp(log.timestamp)}
                             </div>
                           </div>
