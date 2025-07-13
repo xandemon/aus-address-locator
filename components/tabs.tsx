@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { Shield, Search } from "lucide-react";
 
 interface TabsProps {
   activeTab: "verifier" | "source";
@@ -32,7 +33,7 @@ const Tabs = ({ activeTab, onTabChange, children }: TabsProps) => {
 
 const TabsList = ({ children }: TabListProps) => {
   return (
-    <div className="inline-flex h-12 items-center justify-center rounded-lg bg-gray-100 p-1 text-gray-500">
+    <div className="inline-flex bg-white border border-slate-200 rounded-2xl p-2 shadow-sm">
       {children}
     </div>
   );
@@ -46,17 +47,51 @@ const TabsTrigger = ({
 }: TabTriggerProps) => {
   const isActive = activeTab === value;
 
+  const getTabContent = () => {
+    if (value === "verifier") {
+      return {
+        icon: Shield,
+        title: "Address Verifier",
+        description: "Validate postal addresses",
+      };
+    } else {
+      return {
+        icon: Search,
+        title: "Location Search",
+        description: "Find suburbs & locations",
+      };
+    }
+  };
+
+  const { icon: Icon, title, description } = getTabContent();
+
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center whitespace-nowrap rounded-md px-6 py-2 text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+        "flex items-center px-6 py-4 rounded-xl transition-all duration-200 min-w-[240px] text-left",
         isActive
-          ? "bg-white text-gray-900 shadow-sm"
-          : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+          ? "bg-blue-50 text-blue-700 border border-blue-100 shadow-sm"
+          : "text-slate-600 border-white hover:bg-slate-50 hover:text-slate-900"
       )}
       onClick={() => onTabChange(value)}
     >
-      {children}
+      <div
+        className={cn(
+          "w-10 h-10 rounded-lg flex items-center justify-center mr-4 transition-colors",
+          isActive ? "bg-blue-100" : "bg-slate-100"
+        )}
+      >
+        <Icon
+          className={cn(
+            "w-5 h-5",
+            isActive ? "text-blue-600" : "text-slate-600"
+          )}
+        />
+      </div>
+      <div className="flex-1">
+        <div className="font-semibold text-sm">{title}</div>
+        <div className="text-xs opacity-70 mt-0.5">{description}</div>
+      </div>
     </button>
   );
 };
@@ -65,7 +100,7 @@ const TabsContent = ({ value, activeTab, children }: TabContentProps) => {
   if (activeTab !== value) return null;
 
   return (
-    <div className="mt-6 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+    <div className="ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
       {children}
     </div>
   );
