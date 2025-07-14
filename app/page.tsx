@@ -33,7 +33,7 @@ function MainContent() {
         </div>
 
         <Tabs activeTab={activeTab} onTabChange={setActiveTab}>
-          <div className="flex justify-center mb-4 sm:mb-6">
+          <div className="flex justify-center mb-4">
             <TabsList>
               <TabsTrigger
                 value="verifier"
@@ -52,10 +52,10 @@ function MainContent() {
             </TabsList>
           </div>
 
-          <div className="flex justify-center mb-8 sm:mb-12">
+          <div className="flex justify-center mb-8">
             <button
               onClick={() => setShowActivityLogs(true)}
-              className="text-slate-400 hover:text-slate-500 text-sm font-medium px-3 py-2 underline rounded-md hover:bg-slate-100 transition-all duration-200"
+              className="text-slate-400 hover:text-slate-500 text-sm font-semibold px-3 py-2 hover:underline rounded-md hover:bg-slate-100 transition-all duration-200 cursor-pointer"
             >
               <BarChart3 className="w-4 h-4 inline mr-1" />
               View Saved Logs

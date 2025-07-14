@@ -33,7 +33,7 @@ const Tabs = ({ activeTab, onTabChange, children }: TabsProps) => {
 
 const TabsList = ({ children }: TabListProps) => {
   return (
-    <div className="flex flex-col sm:flex-row bg-white border border-slate-200 rounded-2xl p-2 shadow-sm gap-2 sm:gap-0 w-full sm:w-auto">
+    <div className="flex flex-row bg-white border border-slate-200 rounded-2xl p-2 shadow-sm gap-2 sm:gap-0 w-full sm:w-auto">
       {children}
     </div>
   );
@@ -68,7 +68,7 @@ const TabsTrigger = ({
   return (
     <button
       className={cn(
-        "flex items-center px-4 sm:px-6 py-3 sm:py-4 rounded-xl transition-all duration-200 w-full sm:min-w-[240px] text-left",
+        "flex flex-col sm:flex-row items-center px-4 sm:px-6 py-3 sm:py-4 rounded-xl transition-all duration-200 w-full sm:min-w-[240px] text-left",
         isActive
           ? "bg-blue-50 text-blue-700 border border-blue-100 shadow-sm"
           : "text-slate-600 border-white hover:bg-slate-50 hover:text-slate-900"
@@ -88,7 +88,7 @@ const TabsTrigger = ({
           )}
         />
       </div>
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 text-center md:text-left">
         <div className="font-semibold text-sm sm:text-base truncate">
           {title}
         </div>
