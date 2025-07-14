@@ -108,7 +108,7 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
         </div>
 
         <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(100vh-120px)] sm:max-h-[calc(75vh-140px)]">
-          {!elasticsearchHealthy ? (
+          {!loading && !elasticsearchHealthy ? (
             <div className="text-center py-8 text-gray-500">
               <FileText className="h-12 w-12 mx-auto mb-4 text-gray-300" />
               <p>Logging service unavailable</p>
