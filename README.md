@@ -2,6 +2,8 @@
 
 A single-page application built with Next.js that allows users to verify Australian addresses and search for locations using the Australia Post API.
 
+![Application Preview](./public/preview.png)
+
 ## 🚀 Features
 
 - **Tab Navigation**
@@ -150,6 +152,7 @@ Type is strictly enforced in the persisted data, therefore, if there are cases w
 
 ## ✨ Future Improvements
 
+- Show map next to the search results after selection in **Source** tab similar to that in **Verifier** tab
 - Skeleton loading and fluent animations
 - Testing with Jest or other testing libraries
-- More UX improvements and refactoring
+- More UX and responsive design improvements and refactoring
