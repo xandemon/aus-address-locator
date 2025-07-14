@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { formatLocationDisplay, formatSuburbName } from "@/lib/utils";
+import { cn, formatLocationDisplay, formatSuburbName } from "@/lib/utils";
 import { BarChart3, Clock, FileText, MapPin, X } from "lucide-react";
 
 interface LogEntry {
@@ -193,14 +193,23 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
                             <div className="flex items-center space-x-2">
                               {isVerifier ? (
-                                <FileText className="h-4 w-4 text-green-600 flex-shrink-0" />
+                                <FileText
+                                  className={cn(
+                                    "h-4 w-4 flex-shrink-0",
+                                    log?.result?.isValid
+                                      ? "text-green-600"
+                                      : "text-red-600"
+                                  )}
+                                />
                               ) : (
                                 <MapPin className="h-4 w-4 text-blue-600 flex-shrink-0" />
                               )}
                               <span
                                 className={`px-2 py-1 text-xs font-medium rounded ${
                                   isVerifier
-                                    ? "bg-green-100 text-green-800"
+                                    ? log?.result?.isValid
+                                      ? "bg-green-100 text-green-800"
+                                      : "bg-red-100 text-red-800"
                                     : "bg-blue-100 text-blue-800"
                                 }`}
                               >
@@ -223,7 +232,14 @@ export function ActivityLogsModal({ isOpen, onClose }: ActivityLogsModalProps) {
                                 </strong>
                                 , {log.input?.state} {log.input?.postcode}
                               </div>
-                              <div className="text-green-600 mt-1 break-words">
+                              <div
+                                className={cn(
+                                  "mt-1 break-words",
+                                  log?.result?.isValid
+                                    ? "text-green-600"
+                                    : "text-red-600"
+                                )}
+                              >
                                 {log.result?.message}
                               </div>
                             </div>

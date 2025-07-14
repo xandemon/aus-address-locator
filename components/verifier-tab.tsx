@@ -106,7 +106,7 @@ export function VerifierTab() {
         const verificationResult = result.data.verifyAddress;
         updateVerifierData({ lastResult: verificationResult });
 
-        if (verificationResult.isValid) {
+        if (verificationResult) {
           await logInteraction("verifier", {
             input: {
               postcode: formData.postcode,
