@@ -102,7 +102,8 @@ export async function verifyAddress(
     console.error("Error verifying address:", error);
     return {
       isValid: false,
-      message: "Unable to verify address at this time. Please try again later.",
+      message:
+        "Unable to verify address. Please try with different details or try again later.",
     };
   }
 }

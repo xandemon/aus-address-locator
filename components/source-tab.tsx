@@ -159,7 +159,7 @@ export function SourceTab() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 error={!!searchError}
                 errorMessage={searchError}
-                hint="Try: Melbourne, Sydney CBD, Brisbane"
+                hint="Try: Melbourne, Sydney, Brisbane"
               />
             </div>
             <Button
