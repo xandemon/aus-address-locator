@@ -218,7 +218,7 @@ export function SourceTab() {
                     key={location.id}
                     className={`border rounded-xl p-3 sm:p-4 cursor-pointer transition-all duration-200 ${
                       sourceData.selectedLocation?.id === location.id
-                        ? "border-blue-300 bg-blue-50 shadow-sm ring-2 ring-blue-200"
+                          ? "border-blue-300 bg-blue-50 shadow-sm "
                         : "border-slate-200 hover:border-blue-200 hover:bg-slate-50"
                     }`}
                     onClick={() => handleLocationSelect(location)}

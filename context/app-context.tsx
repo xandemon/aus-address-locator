@@ -77,7 +77,6 @@ export function AppProvider({ children }: AppProviderProps) {
   useEffect(() => {
     if (isHydrated) {
       debouncedPersistTabState(state);
-      console.log(state);
     }
   }, [state, isHydrated]);
 
