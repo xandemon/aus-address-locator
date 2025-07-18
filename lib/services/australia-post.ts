@@ -67,7 +67,9 @@ export async function verifyAddress(
 
     console.log(JSON.stringify(postcodeResponse, null, 2));
 
-    const localities = postcodeResponse.localities?.locality;
+    let localities = postcodeResponse.localities?.locality;
+
+    localities = Array.isArray(localities) ? localities : [localities];
 
     if (!localities?.length) {
       return {
@@ -123,11 +125,15 @@ export async function searchLocations(
     const response = await makeRequest(endpoint, params);
     console.log(response, JSON.stringify(response, null, 2));
 
-    if (!response.localities?.locality?.length) {
+    let locations = response.localities?.locality;
+
+    if (!locations) {
       return { locations: [], total: 0 };
     }
 
-    let locations = response.localities.locality;
+    if (!Array.isArray(locations)) {
+      locations = [locations];
+    }
 
     if (category && category !== "") {
       locations = locations.filter(
