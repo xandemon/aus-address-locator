@@ -38,25 +38,15 @@ const errorLink = onError(
 
 export const apolloClient = new ApolloClient({
   link: from([errorLink, authLink, httpLink]),
-  cache: new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {
-          searchLocations: {
-            merge(existing = [], incoming) {
-              return incoming;
-            },
-          },
-        },
-      },
-    },
-  }),
+  cache: new InMemoryCache(),
   defaultOptions: {
     watchQuery: {
       errorPolicy: "all",
+      fetchPolicy: "network-only",
     },
     query: {
       errorPolicy: "all",
+      fetchPolicy: "network-only",
     },
   },
 });
